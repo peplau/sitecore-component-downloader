@@ -1,0 +1,106 @@
+----item----
+version: 1
+id: {B5E6BEDF-223D-427E-92AF-AAAD32EAF844}
+database: core
+path: /sitecore/client/Your Apps/ListPageDialog
+parent: {E9A53290-8618-43EC-9A4B-7DA2AF424800}
+name: ListPageDialog
+master: {AD881EC1-7B28-4813-8A88-31D29D96E85A}
+template: {8152CF09-9DD0-40C0-B806-6E91FDF389BC}
+templatekey: Speak-DialogPage
+
+----field----
+field: {5E642935-A6FC-48E9-B039-FE1136CED488}
+name: Theme
+key: theme
+content-length: 6
+
+Oxford
+----field----
+field: {F7B4EBC1-2335-4EB8-AFAE-3444923A38BE}
+name: Subthemes
+key: subthemes
+content-length: 38
+
+{F69304BA-2B80-4555-96DD-6F08559405E1}
+----field----
+field: {F6D8A61C-2F84-4401-BD24-52D2068172BC}
+name: __Originator
+key: __originator
+content-length: 0
+
+
+----field----
+field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
+name: __Renderings
+key: __renderings
+content-length: 5287
+
+<r>
+  <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
+    <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeTypeName=Sitecore.Component.Downloader.Api.Speak.ListPageDialog.ListPageDialog%2c+Sitecore.Component.Downloader.Api&amp;PageCodeScriptFileName=%2fsitecore%2fclient%2fYour+Apps%2fListPageDialog%2fListPageDialog.js" ph="Page.Code" uid="{237256AA-9D30-463E-9ED1-90CFF092FCF6}" />
+    <r id="{7BA20861-BC27-4F0E-94DD-8F974628A5C4}" ph="Page.Body" uid="{50606E5F-8450-418F-B448-859F66371220}" />
+    <r id="{642C1164-3AE1-4D86-8474-3BC19FE4433B}" ph="DialogHeader" uid="{3AB2380C-C8AD-4B42-8848-69418CE847F8}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=HeaderTitle&amp;Text=Component+Downloader" ph="DialogHeader.Title" uid="{1DC97590-77EC-4F75-A687-D86F7D22CAAA}" />
+    <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.download()&amp;Id=DownloadButton&amp;IsEnabled=1&amp;ButtonType=Primary&amp;Text=Download" ph="DialogHeader.Buttons" uid="{F5005B19-B18B-47BE-B0CA-D92005C2FECA}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabComponentPath&amp;TextType=LargeTitle" ph="DialogContent.Title" uid="{0DC24E56-ADE9-4039-9DF7-FE4E14579A64}" />
+    <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3adebugger%3b+alert(this.close)%3b+this.close()%3bdebugger%3b+&amp;Id=CancelButton&amp;IsEnabled=1&amp;ButtonType=Default&amp;Tooltip=Close+the+dialog&amp;Text=Cancel" ph="DialogHeader.Buttons" uid="{F5005B19-B18B-47BE-B0CA-D92005C2FECA}" />
+    <r id="{300455F0-D5AF-4EB6-8758-BD41875C981C}" ph="DialogContent" uid="{57882B01-67A3-40A2-B6F0-F84287D6F584}" />
+    <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="IsGridRowFluid=1&amp;Id=FirstRowBorder" ph="DialogContent.Main" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabDsTemplate&amp;TextType=LargeLabel&amp;Text=Datasource+Template" ph="DialogContent.Main" uid="{EC44FFD7-57F0-4723-B81F-20BCA790F010}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=TxtDsTemplateEmpty&amp;IsVisible=0&amp;Text=Not+set" ph="DialogContent.Main" uid="{1D0388E5-1ECB-42C4-8182-FE5622F0C0B6}" />
+    <r id="{44DBDD8B-A63F-42F7-BD11-EB7B26C413FB}" par="Id=SectionDatasourceTemplate&amp;Tooltip=Section+Title" ph="DialogContent.Main" uid="{E37C4163-E4AC-4543-B72C-E5404449350B}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeDsTemplate" ph="SectionDatasourceTemplate.Content" uid="{1CAF67FC-A9BB-48FE-B82C-75615348AD52}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabDsTemplateRelatedTemplates&amp;Text=Base+Templates" ph="SectionDatasourceTemplate.Content" uid="{8F3C0D28-3313-46DD-8358-DE8409DB97B8}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeDsBaseTemplates" ph="SectionDatasourceTemplate.Content" uid="{551C1E03-F828-446C-918F-AD39B20104CA}" />
+    <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=10&amp;ContentAlign=Left&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan10" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="&amp;Id=SelectedMediaTitle&amp;TextType=LargeTitle&amp;Text=%7bBinding+NavigationGroup.selectedItemName%7d" ph="FirstRowBorderSpan10.Content" uid="{07277A71-CC94-4279-BC89-6C9A07A6CD18}" />
+    <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=2&amp;ContentAlign=Right&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan2" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NavigationText&amp;TextType=Divider&amp;Text=Operations" ph="DialogContent.Navigation" uid="{204E5A49-C379-491E-B596-34B5CF67A750}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.expandAllTreeViews()%3b&amp;Id=btnExpandAll&amp;BackgroundPosition=-36px+0px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Expand+All" ph="DialogContent.Navigation" uid="{74AFE94E-A0F3-4A9B-A77F-73524241F41A}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.collapseAllTreeViews()%3b&amp;Id=btnCollapseAll&amp;BackgroundPosition=0px+-68px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Collapse+All" ph="DialogContent.Navigation" uid="{3EB9A434-4F23-4CE5-9161-EB82640F6F80}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.checkAllTreeViews()%3b&amp;Id=btnCheckAll&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Check+All" ph="DialogContent.Navigation" uid="{EABBF85E-CFBE-4F4B-A07F-960670E7C3B0}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.uncheckAllTreeViews()%3b&amp;Id=btnUncheckAll&amp;Text=Uncheck+All" ph="DialogContent.Navigation" uid="{EE5CE86B-D7D1-4EAF-92BA-B79B1E5AA2CE}" />
+    <r id="{DDF19992-89DB-4F29-82EC-F16A8C8D15B9}" par="Id=NavigationGroup" ph="DialogContent.Navigation" uid="{8A2FB633-0B66-4E95-BE9B-8CC05B29B818}" />
+  </d>
+</r>
+----version----
+language: en
+version: 1
+revision: 0ca68846-669a-460a-9527-d03e012d2d4b
+
+----field----
+field: {7205A57F-93B4-413A-AA9A-6B16BBC59565}
+name: BrowserTitle
+key: browsertitle
+content-length: 9
+
+List Page
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20160330T194059Z
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+0ca68846-669a-460a-9527-d03e012d2d4b
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 16
+
+20160502T234745Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin
