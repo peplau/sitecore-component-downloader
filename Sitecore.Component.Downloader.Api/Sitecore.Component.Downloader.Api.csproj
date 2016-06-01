@@ -40,8 +40,13 @@
       <HintPath>..\References\Sitecore.Speak.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,7 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Downloader.cs" />
-    <Compile Include="Component\ComponentWrapper.cs" />
+    <Compile Include="Packages\PackageData.cs" />
+    <Compile Include="Packages\PackageManager.cs" />
+    <Compile Include="Packages\PackageSource.cs" />
+    <Compile Include="Wrappers\ComponentWrapper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Pipelines\AddDynamicControls.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

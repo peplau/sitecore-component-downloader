@@ -1,6 +1,7 @@
 ﻿using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
-namespace Sitecore.Component.Downloader.Api.Component
+
+namespace Sitecore.Component.Downloader.Api.Wrappers
 {
     public class ComponentWrapper : CustomItem
     {

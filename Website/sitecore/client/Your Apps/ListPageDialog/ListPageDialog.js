@@ -9,7 +9,7 @@ define(["sitecore"], function (Sitecore) {
             myListPageDialog = this;
 
             // Expand all nodes
-            this.expandAllTreeViews();
+            //this.expandAllTreeViews();
 
             ////var treeView = $("." + this.TreeDsTemplate.attributes.type);
 
@@ -118,19 +118,57 @@ define(["sitecore"], function (Sitecore) {
                 }
             });
         },
-        download: function (a, b, c) {
+        getSelectedNodes : function() {
             var trees = new Array(this.TreeDsTemplate, this.TreeDsBaseTemplates);
             var selectedNodes = new Array();
             $.each(trees, function (key, thisTree) {
                 myListPageDialog.visitTreeView(thisTree, function (node) {
                     if (node.isSelected()) {
-                        selectedNodes[selectedNodes.Length] = node;
+                        selectedNodes[selectedNodes.length] = node;
                     }
                 });
             });
+            return selectedNodes;
+        },
+        getRenderingId: function () {
+            var id = Sitecore.Helpers.url.getQueryParameters(window.location.href)['cid'];
+            if (Sitecore.Helpers.id.isId(id)) {
+                return id;
+            }
+            return null;
+        },
+        download: function (a, b, c) {
+            var selectedNodes = this.getSelectedNodes();
 
-            debugger;
             alert(selectedNodes.length);
+            debugger;
+
+            var strPaths = "";
+            for (var i = 0; i < selectedNodes.length; i++)
+                strPaths += selectedNodes[i].data.path + "|";
+
+            // data-sc-id="DownloadForm"
+            var form = $("[data-sc-id='DownloadForm']");
+            if (form.length === 0)
+                return;
+            form.attr("method","POST");
+
+            $("<input/>",
+            {
+                id: "selectedPaths",
+                name: "selectedPaths",
+                type: "hidden",
+                value: strPaths
+            }).appendTo(form);
+            $("<input/>",
+            {
+                id: "renderingId",
+                name: "renderingId",
+                type: "hidden",
+                value: this.getRenderingId()
+            }).appendTo(form);
+
+            form.submit();
         }
     });
     return ListPageDialog;
