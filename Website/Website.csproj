@@ -96,7 +96,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Config\Include\Sitecore.Component.Downloader.config" />
+    <None Include="App_Config\Include\Sitecore.Component.Downloader.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Deploy to SC81U1.pubxml" />
     <None Include="Properties\PublishProfiles\Sitecore Rule Processor - Publish.pubxml" />

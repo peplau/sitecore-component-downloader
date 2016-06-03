@@ -1,8 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
-using Sitecore.Component.Downloader.Api.Wrappers;
+using Sitecore.Component.Downloader.Api.Managers;
+using Sitecore.Component.Downloader.Api.Packages;
 using Sitecore.Data;
+using Sitecore.Data.Items;
 
 namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
 {
@@ -15,10 +18,11 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
         public Mvc.Presentation.Rendering TxtDsTemplateEmpty { get; set; }
         public Mvc.Presentation.Rendering SectionDatasourceTemplate { get; set; }
         public Mvc.Presentation.Rendering TxtSelectedItems { get; set; }
+        public Mvc.Presentation.Rendering TreeDsItems { get; set; }
         #endregion
 
-        private ComponentWrapper _componentItem;
-        public ComponentWrapper ComponentItem
+        private Item _componentItem;
+        public Item ComponentItem
         {
             get
             {
@@ -36,15 +40,30 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
                 var item = Context.ContentDatabase.GetItem(id);
                 if (item == null)
                     return null;
-                _componentItem = new ComponentWrapper(item);
+                _componentItem = item;
                 return _componentItem;
+            }
+        }
+
+        private TemplateItem _datasourceTemplate;
+        public TemplateItem DatasourceTemplate
+        {
+            get
+            {
+                if (_datasourceTemplate != null)
+                    return _datasourceTemplate;
+                _datasourceTemplate = ComponentManager.GetDatasourceTemplate(ComponentItem);
+                return _datasourceTemplate;
             }
         }
 
         public override void Initialize()
         {
-            //		HttpContext.Current.Request.HttpMethod	"POST"	string
-            //		HttpContext.Current.Request.Form["selectedPaths"]	"/sitecore/templates/Keystone/Components/Accordion Container|/sitecore/templates/Keystone/Components/Accordion Container/Teste|/sitecore/templates/Keystone/Components/Accordion Container/Teste/Campo 1|/sitecore/templates/Keystone/Components/Accordion Container/Teste/Campo 2|/sitecore/templates/Keystone/Components/Accordion Container/__Standard Values|/sitecore/templates/System/Templates/Standard template|/sitecore/templates/System/Templates/Standard template|/sitecore/templates/Keystone/Base/Fields/Base - Component/__Standard Values|/sitecore/templates/Keystone/Base/Fields/Base - Component/Styles|/sitecore/templates/Keystone/Base/Fields/Base - Component/Styles/Additional Styles|/sitecore/templates/Keystone/Base/Fields/Base - Component/Custom|/sitecore/templates/Keystone/Base/Fields/Base - Component/Custom/Custom Styles|/sitecore/templates/Keystone/Base/Fields/Base - Component/Mobile|/sitecore/templates/Keystone/Base/Fields/Base - Component/Mobile/ResponsiveStyles|/sitecore/templates/System/Templates/Standard template|/sitecore/templates/Keystone/Base/Fields/Components/Base - Accordion Container/Accordion Container Fields|/sitecore/templates/Keystone/Base/Fields/Components/Base - Accordion Container/Accordion Container Fields/Allow Multiple Panels Opened|"	string
+            // Escape if Component can't be found
+            if (ComponentItem == null)
+                return;
+
+            // Create package and download it
             if (HttpContext.Current.Request.HttpMethod == "POST" 
                 && HttpContext.Current.Request.Form.AllKeys.Contains("selectedPaths"))
             {
@@ -52,28 +71,68 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
                 return;
             }
 
-            // Escape if Component can't be found
-            if (ComponentItem == null)
-                return;
-
             BindControls();
         }
 
         private void DownloadPackage()
         {
-            throw new NotImplementedException();
+            var strPath = HttpContext.Current.Request.Form["selectedPaths"];
+            if (string.IsNullOrEmpty(strPath))
+                return;
+
+            // Pack data
+            var packData = new PackageData
+            {
+                Database = ComponentItem.Database.Name,
+                PackageName = string.IsNullOrEmpty(ComponentItem.DisplayName)
+                    ? ComponentItem.Name
+                    : ComponentItem.DisplayName,
+                Author = Context.User.GetLocalName()
+            };
+
+            // Paths
+            var paths = strPath.Split('|').Where(p=>!string.IsNullOrEmpty(p)).ToList();
+            var source = new PackageSource { Name = packData.PackageName, Paths = paths };
+            packData.Sources = new List<PackageSource> { source };
+
+            // Create Pack
+            var dataFolder = Configuration.Settings.PackagePath;
+            if (!dataFolder.EndsWith("/"))
+                dataFolder += "/";
+
+            // Check if file already exists
+            var packPath = string.Format("{0}{1}{2}.zip", dataFolder, packData.PackageName, "");
+            var counter = 1;
+            while (File.Exists(packPath))
+            {
+                counter++;
+                packPath = string.Format("{0}{1}{2}.zip", dataFolder, packData.PackageName, counter);
+            }
+
+            string error;
+            var success = PackageManager.CreatePackage(packData, packPath, out error);
+
+            // Download Pack
+            if (!success)
+            {
+                Diagnostics.Log.Error("Error creating package - " + error, this);
+                HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
+                return;
+            }
+
+            HttpContext.Current.Response.Redirect(packPath);
         }
 
         private void BindControls()
         {
-            LabComponentPath.Parameters["Text"] = ComponentItem.InnerItem.Paths.Path;
+            LabComponentPath.Parameters["Text"] = ComponentItem.Paths.Path;
 
             BindDsTemplate();
         }
 
         private void BindDsTemplate()
         {
-            if (ComponentItem.DatasourceTemplate == null)
+            if (DatasourceTemplate == null)
             {
                 TxtDsTemplateEmpty.Parameters["IsVisible"] = "True";
                 SectionDatasourceTemplate.Parameters["IsVisible"] = "False";
@@ -81,13 +140,21 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
             }
 
             // Datasource Template
-            TreeDsTemplate.Parameters["RootItem"] = ComponentItem.DatasourceTemplate.ID.ToString();
-            TreeDsTemplate.Parameters["Database"] = ComponentItem.DatasourceTemplate.Database.Name;
+            TreeDsTemplate.Parameters["RootItem"] = DatasourceTemplate.ID.ToString();
+            TreeDsTemplate.Parameters["Database"] = DatasourceTemplate.Database.Name;
 
             // Base Templates
-            TreeDsBaseTemplates.Parameters["RootItem"] = String.Join("|",
-                ComponentItem.DatasourceTemplate.BaseTemplates.Select(p => p.ID.ToString()).ToArray());
-            TreeDsBaseTemplates.Parameters["Database"] = ComponentItem.DatasourceTemplate.Database.Name;
+            TreeDsBaseTemplates.Parameters["RootItem"] = string.Join("|",
+                DatasourceTemplate.BaseTemplates.Select(p => p.ID.ToString()).ToArray());
+            TreeDsBaseTemplates.Parameters["Database"] = DatasourceTemplate.Database.Name;
+
+            // Items of the same type
+            var items = LinkDatabaseManager.GetItemsOfTemplate(DatasourceTemplate);
+            if (items != null && items.Any())
+            {
+                TreeDsItems.Parameters["RootItem"] = string.Join("|",items.Select(p => p.ID.ToString()).ToArray());
+                TreeDsItems.Parameters["Database"] = DatasourceTemplate.Database.Name;
+            }
         }
     }
 }

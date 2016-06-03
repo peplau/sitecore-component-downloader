@@ -84,11 +84,11 @@
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\client\Your Apps\ListPageDialog.item">
+    <SitecoreItem Include="sitecore\client\Your Apps\ComponentDownloader.item">
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>KeepAllChildrenSynchronized</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\client\Your Apps\ListPageDialog\PageSettings.item">
+    <SitecoreItem Include="sitecore\client\Your Apps\ComponentDownloader\PageSettings.item">
       <ChildItemSynchronization>KeepAllChildrenSynchronized</ChildItemSynchronization>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
     </SitecoreItem>

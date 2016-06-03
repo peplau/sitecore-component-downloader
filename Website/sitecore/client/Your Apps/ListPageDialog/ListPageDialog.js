@@ -3,9 +3,6 @@
 define(["sitecore"], function (Sitecore) {
     var ListPageDialog = Sitecore.Definitions.App.extend({
         initialized: function () {
-            alert(123);
-            debugger;
-
             myListPageDialog = this;
 
             // Expand all nodes
@@ -47,9 +44,14 @@ define(["sitecore"], function (Sitecore) {
             //Sitecore.Speak.Factories.createComponent("ItemTreeViews", model, view, ".sc-SimpleComponent");
 
         },
-        visitAllTreeViews: function(callback) {
-            this.visitTreeView(this.TreeDsTemplate, callback);
-            this.visitTreeView(this.TreeDsBaseTemplates, callback);
+        getAllTreeViews : function() {
+            return new Array(this.TreeDsTemplate, this.TreeDsBaseTemplates, this.TreeDsItems);
+        },
+        visitAllTreeViews: function (callback) {
+            var trees = this.getAllTreeViews();
+            $.each(trees, function (key, thisTree) {
+                myListPageDialog.visitTreeView(thisTree, callback);
+            });
         },
         visitTreeView: function(tree, callback) {
             var domTree = $("[data-sc-id='" + tree.attributes.name + "']");
@@ -60,17 +62,20 @@ define(["sitecore"], function (Sitecore) {
                 rootNode.visit(callback);
             });
         },
-        expandAllTreeViews:function() {
-            this.expandTreeView(this.TreeDsTemplate);
-            this.expandTreeView(this.TreeDsBaseTemplates);
-
+        expandAllTreeViews: function () {
+            var trees = this.getAllTreeViews();
+            $.each(trees, function (key, thisTree) {
+                myListPageDialog.expandTreeView(thisTree);
+            });
             window.setTimeout(function () {
-                myListPageDialog.expandTreeView(myListPageDialog.TreeDsTemplate);
-                myListPageDialog.expandTreeView(myListPageDialog.TreeDsBaseTemplates);
+                $.each(trees, function (key, thisTree) {
+                    myListPageDialog.expandTreeView(thisTree);
+                });
             }, 500);
             window.setTimeout(function () {
-                myListPageDialog.expandTreeView(myListPageDialog.TreeDsTemplate);
-                myListPageDialog.expandTreeView(myListPageDialog.TreeDsBaseTemplates);
+                $.each(trees, function (key, thisTree) {
+                    myListPageDialog.expandTreeView(thisTree);
+                });
             }, 1000);
         },
         expandTreeView: function (tree) {
@@ -84,9 +89,11 @@ define(["sitecore"], function (Sitecore) {
                 }
             });
         },
-        collapseAllTreeViews : function() {
-            this.collapseTreeView(this.TreeDsTemplate);
-            this.collapseTreeView(this.TreeDsBaseTemplates);
+        collapseAllTreeViews: function () {
+            var trees = this.getAllTreeViews();
+            $.each(trees, function (key, thisTree) {
+                myListPageDialog.collapseTreeView(thisTree);
+            });
         },
         collapseTreeView: function (tree) {
             this.visitTreeView(tree, function (node) {
@@ -96,9 +103,10 @@ define(["sitecore"], function (Sitecore) {
             });
         },
         checkAllTreeViews: function () {
-            debugger;
-            this.checkTreeView(this.TreeDsTemplate);
-            this.checkTreeView(this.TreeDsBaseTemplates);
+            var trees = this.getAllTreeViews();
+            $.each(trees, function (key, thisTree) {
+                myListPageDialog.checkTreeView(thisTree);
+            });
         },
         checkTreeView: function (tree) {
             this.visitTreeView(tree, function (node) {
@@ -108,8 +116,10 @@ define(["sitecore"], function (Sitecore) {
             });
         },
         uncheckAllTreeViews: function () {
-            this.uncheckTreeView(this.TreeDsTemplate);
-            this.uncheckTreeView(this.TreeDsBaseTemplates);
+            var trees = this.getAllTreeViews();
+            $.each(trees, function (key, thisTree) {
+                myListPageDialog.uncheckTreeView(thisTree);
+            });
         },
         uncheckTreeView: function (tree) {
             this.visitTreeView(tree, function (node) {
@@ -118,8 +128,8 @@ define(["sitecore"], function (Sitecore) {
                 }
             });
         },
-        getSelectedNodes : function() {
-            var trees = new Array(this.TreeDsTemplate, this.TreeDsBaseTemplates);
+        getSelectedNodes: function () {
+            var trees = this.getAllTreeViews();
             var selectedNodes = new Array();
             $.each(trees, function (key, thisTree) {
                 myListPageDialog.visitTreeView(thisTree, function (node) {
