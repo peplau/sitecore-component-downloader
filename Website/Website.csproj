@@ -114,7 +114,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sitecore\client\Your Apps\ListPageDialog\ListPageDialog.js" />
+    <Content Include="sitecore\client\Your Apps\ComponentDownloader\ComponentDownloader.js" />
     <Content Include="sitecore\shell\client\Business Component Library\Layouts\Renderings\ListsAndGrids\TreeViews\ItemTreeView2.js" />
   </ItemGroup>
   <PropertyGroup>

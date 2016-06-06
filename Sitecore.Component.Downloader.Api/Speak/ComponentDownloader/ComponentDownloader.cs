@@ -7,9 +7,9 @@ using Sitecore.Component.Downloader.Api.Packages;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 
-namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
+namespace Sitecore.Component.Downloader.Api.Speak.ComponentDownloader
 {
-    class ListPageDialog : Web.PageCodes.PageCodeBase
+    public class ComponentDownloader : Web.PageCodes.PageCodeBase
     {
         #region Speak Controls at the page
         public Mvc.Presentation.Rendering LabComponentPath { get; set; }
@@ -21,8 +21,11 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
         public Mvc.Presentation.Rendering TreeDsItems { get; set; }
         public Mvc.Presentation.Rendering TreePlaceholderSettings { get; set; }
         public Mvc.Presentation.Rendering LabPlaceholderSettings { get; set; }
+        public Mvc.Presentation.Rendering TreeRules { get; set; }
+        public Mvc.Presentation.Rendering LabRules { get; set; }        
         #endregion
 
+        #region Helper Proterties
         private Item _componentItem;
         public Item ComponentItem
         {
@@ -58,6 +61,7 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
                 return _datasourceTemplate;
             }
         }
+        #endregion
 
         public override void Initialize()
         {
@@ -131,18 +135,30 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
 
             BindDsTemplateAndItems();
             BindPlaceholderSettings();
+            BindRules();
+        }
+
+        private void BindRules()
+        {
+            var ruleItems = LinkDatabaseManager.GetReferrersOfTemplates(ComponentItem, new[]{Constants.TemplateIds.RuleBase});
+            if (ruleItems != null && ruleItems.Any())
+            {
+                TreeRules.Parameters["RootItem"] = string.Join("|", ruleItems.Select(p => p.ID.ToString()).ToArray());
+                TreeRules.Parameters["Database"] = ComponentItem.Database.Name;
+            }
+            else
+            {
+                TreeRules.Parameters["IsVisible"] = "False";
+                LabRules.Parameters["IsVisible"] = "False";
+            }
         }
 
         private void BindPlaceholderSettings()
         {
-            // Placeholder Settings
-            var placeholderTemplates = new TemplateItem(DatasourceTemplate.Database.GetItem(Constants.TemplateIds.PlaceholderSettings));
-            if (placeholderTemplates == null)
-                return;
-            var placeholderSettingItems = LinkDatabaseManager.GetReferrersOfTemplate(ComponentItem, placeholderTemplates);
-            if (placeholderSettingItems != null && placeholderSettingItems.Any())
+            var placeholderSettingsItems = LinkDatabaseManager.GetReferrersOfTemplates(ComponentItem, new[] { Constants.TemplateIds.PlaceholderSettings });
+            if (placeholderSettingsItems != null && placeholderSettingsItems.Any())
             {
-                TreePlaceholderSettings.Parameters["RootItem"] = string.Join("|",placeholderSettingItems.Select(p => p.ID.ToString()).ToArray());
+                TreePlaceholderSettings.Parameters["RootItem"] = string.Join("|",placeholderSettingsItems.Select(p => p.ID.ToString()).ToArray());
                 TreePlaceholderSettings.Parameters["Database"] = ComponentItem.Database.Name;
             }
             else
@@ -171,19 +187,15 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
 
             // Items - of the same type + Datasource Items
             var repositoryItems = ComponentManager.GetDatasourceLocations(ComponentItem);
-            var itemsOfDsTemplates = LinkDatabaseManager.GetReferrersOfTemplate(DatasourceTemplate, DatasourceTemplate);
+            var itemsOfDsTemplate = LinkDatabaseManager.GetReferrersOfTemplates(DatasourceTemplate, new[] { DatasourceTemplate.ID });
             var items = new List<Item>();
             items.AddRange(repositoryItems);
-            foreach (var item in itemsOfDsTemplates)
-            {
-                if (!repositoryItems.Where(p => item.Axes.IsDescendantOf(p)).Any())
-                    items.Add(item);
-            }
-            if (items != null && items.Any())
-            {
-                TreeDsItems.Parameters["RootItem"] = string.Join("|",items.Select(p => p.ID.ToString()).ToArray());
-                TreeDsItems.Parameters["Database"] = DatasourceTemplate.Database.Name;
-            }
+            items.AddRange(itemsOfDsTemplate.Where(item => !repositoryItems.Any(p => item.Axes.IsDescendantOf(p))));
+            if (!items.Any()) 
+                return;
+
+            TreeDsItems.Parameters["RootItem"] = string.Join("|",items.Select(p => p.ID.ToString()).ToArray());
+            TreeDsItems.Parameters["Database"] = DatasourceTemplate.Database.Name;
         }
     }
 }

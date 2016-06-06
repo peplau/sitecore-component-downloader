@@ -34,11 +34,11 @@ content-length: 0
 field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
 name: __Renderings
 key: __renderings
-content-length: 6381
+content-length: 6758
 
 <r>
   <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
-    <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeTypeName=Sitecore.Component.Downloader.Api.Speak.ListPageDialog.ListPageDialog%2c+Sitecore.Component.Downloader.Api&amp;PageCodeScriptFileName=%2fsitecore%2fclient%2fYour+Apps%2fListPageDialog%2fListPageDialog.js" ph="Page.Code" uid="{237256AA-9D30-463E-9ED1-90CFF092FCF6}" />
+    <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeTypeName=Sitecore.Component.Downloader.Api.Speak.ComponentDownloader.ComponentDownloader%2c+Sitecore.Component.Downloader.Api&amp;PageCodeScriptFileName=%2fsitecore%2fclient%2fYour+Apps%2fComponentDownloader%2fComponentDownloader.js" ph="Page.Code" uid="{237256AA-9D30-463E-9ED1-90CFF092FCF6}" />
     <r id="{7BA20861-BC27-4F0E-94DD-8F974628A5C4}" ph="Page.Body" uid="{50606E5F-8450-418F-B448-859F66371220}" />
     <r id="{642C1164-3AE1-4D86-8474-3BC19FE4433B}" ph="DialogHeader" uid="{3AB2380C-C8AD-4B42-8848-69418CE847F8}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=HeaderTitle&amp;Text=Component+Downloader" ph="DialogHeader.Title" uid="{1DC97590-77EC-4F75-A687-D86F7D22CAAA}" />
@@ -58,21 +58,23 @@ content-length: 6381
     <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeDsItems" ph="SectionDatasourceTemplate.Content" uid="{4F2299EE-B6B5-44F6-AFFF-A9998B01AA30}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabPlaceholderSettings&amp;TextType=Divider&amp;Text=Placeholder+Settings" ph="DialogContent.Main" uid="{D3D1506F-A56F-462C-A43D-ADC331281FC6}" />
     <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreePlaceholderSettings" ph="DialogContent.Main" uid="{39A98E0C-1000-42C4-B774-177AE97350DD}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabRules&amp;TextType=Divider&amp;Text=Rules" ph="DialogContent.Main" uid="{7434D30B-17F6-4906-85FA-29E72F01BB9D}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeRules" ph="DialogContent.Main" uid="{94A9BC04-59E2-4566-9BD2-0122C2178745}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=10&amp;ContentAlign=Left&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan10" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="&amp;Id=SelectedMediaTitle&amp;TextType=LargeTitle&amp;Text=%7bBinding+NavigationGroup.selectedItemName%7d" ph="FirstRowBorderSpan10.Content" uid="{07277A71-CC94-4279-BC89-6C9A07A6CD18}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=2&amp;ContentAlign=Right&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan2" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NavigationText&amp;TextType=Divider&amp;Text=Operations" ph="DialogContent.Navigation" uid="{204E5A49-C379-491E-B596-34B5CF67A750}" />
-    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.expandAllTreeViews()%3b&amp;Id=btnExpandAll&amp;BackgroundPosition=-18px+-86px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Expand+All" ph="DialogContent.Navigation" uid="{74AFE94E-A0F3-4A9B-A77F-73524241F41A}" />
-    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.collapseAllTreeViews()%3b&amp;Id=btnCollapseAll&amp;BackgroundPosition=-35px+-86px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Collapse+All" ph="DialogContent.Navigation" uid="{3EB9A434-4F23-4CE5-9161-EB82640F6F80}" />
-    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.checkAllTreeViews()%3b&amp;Id=btnCheckAll&amp;BackgroundPosition=-306px+-357px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Check+All" ph="DialogContent.Navigation" uid="{EABBF85E-CFBE-4F4B-A07F-960670E7C3B0}" />
-    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+myListPageDialog.uncheckAllTreeViews()%3b&amp;Id=btnUncheckAll&amp;BackgroundPosition=-392px+-255px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Uncheck+All" ph="DialogContent.Navigation" uid="{EE5CE86B-D7D1-4EAF-92BA-B79B1E5AA2CE}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+componentDownloaderDialog.expandAllTreeViews()%3b&amp;Id=btnExpandAll&amp;BackgroundPosition=-18px+-86px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Expand+All" ph="DialogContent.Navigation" uid="{74AFE94E-A0F3-4A9B-A77F-73524241F41A}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+componentDownloaderDialog.collapseAllTreeViews()%3b&amp;Id=btnCollapseAll&amp;BackgroundPosition=-35px+-86px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Collapse+All" ph="DialogContent.Navigation" uid="{3EB9A434-4F23-4CE5-9161-EB82640F6F80}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+componentDownloaderDialog.checkAllTreeViews()%3b&amp;Id=btnCheckAll&amp;BackgroundPosition=-306px+-357px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Check+All" ph="DialogContent.Navigation" uid="{EABBF85E-CFBE-4F4B-A07F-960670E7C3B0}" />
+    <r id="{51194966-86A8-44C3-988D-E983744AB0DE}" par="Click=javascript%3a+componentDownloaderDialog.uncheckAllTreeViews()%3b&amp;Id=btnUncheckAll&amp;BackgroundPosition=-392px+-255px&amp;ImageUrl=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2fimg%2fsc-sprite.png&amp;Text=Uncheck+All" ph="DialogContent.Navigation" uid="{EE5CE86B-D7D1-4EAF-92BA-B79B1E5AA2CE}" />
     <r id="{DDF19992-89DB-4F29-82EC-F16A8C8D15B9}" par="Id=NavigationGroup" ph="DialogContent.Navigation" uid="{8A2FB633-0B66-4E95-BE9B-8CC05B29B818}" />
   </d>
 </r>
 ----version----
 language: en
 version: 1
-revision: 3b0a29ec-96c1-441d-86eb-c9db4b61c749
+revision: 09e2e85f-f81d-493c-91ff-b8e718a15e27
 
 ----field----
 field: {7205A57F-93B4-413A-AA9A-6B16BBC59565}
@@ -94,14 +96,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-3b0a29ec-96c1-441d-86eb-c9db4b61c749
+09e2e85f-f81d-493c-91ff-b8e718a15e27
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 16
 
-20160605T233255Z
+20160606T221642Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

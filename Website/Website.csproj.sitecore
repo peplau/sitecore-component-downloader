@@ -3,5 +3,5 @@
     <Site Server="SC81U1" UserName="sitecore\admin" IsRemoteSitecore="False" />
   </PropertyGroup>
   <File Include="App_Config\Include\Sitecore.Component.Downloader.config" FileTimestamp="0" FileSize="0" ServerTimestamp="0" ServerFileSize="0" />
-  <File Include="sitecore\client\Your Apps\ListPageDialog\ListPageDialog.js" FileTimestamp="0" FileSize="0" ServerTimestamp="0" ServerFileSize="0" />
+  <File Include="sitecore\client\Your Apps\ComponentDownloader\ComponentDownloader.js" FileTimestamp="0" FileSize="0" ServerTimestamp="0" ServerFileSize="0" />
 </Project>

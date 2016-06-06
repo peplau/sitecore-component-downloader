@@ -1,9 +1,9 @@
-﻿var myListPageDialog;
+﻿var componentDownloaderDialog;
 
 define(["sitecore"], function (Sitecore) {
     var ListPageDialog = Sitecore.Definitions.App.extend({
         initialized: function () {
-            myListPageDialog = this;
+            componentDownloaderDialog = this;
 
             // Expand all nodes
             //this.expandAllTreeViews();
@@ -45,12 +45,17 @@ define(["sitecore"], function (Sitecore) {
 
         },
         getAllTreeViews : function() {
-            return new Array(this.TreeDsTemplate, this.TreeDsBaseTemplates, this.TreeDsItems);
+            return new Array(
+                this.TreeDsTemplate,
+                this.TreeDsBaseTemplates,
+                this.TreeDsItems,
+                this.TreePlaceholderSettings
+            );
         },
         visitAllTreeViews: function (callback) {
             var trees = this.getAllTreeViews();
             $.each(trees, function (key, thisTree) {
-                myListPageDialog.visitTreeView(thisTree, callback);
+                componentDownloaderDialog.visitTreeView(thisTree, callback);
             });
         },
         visitTreeView: function(tree, callback) {
@@ -65,16 +70,16 @@ define(["sitecore"], function (Sitecore) {
         expandAllTreeViews: function () {
             var trees = this.getAllTreeViews();
             $.each(trees, function (key, thisTree) {
-                myListPageDialog.expandTreeView(thisTree);
+                componentDownloaderDialog.expandTreeView(thisTree);
             });
             window.setTimeout(function () {
                 $.each(trees, function (key, thisTree) {
-                    myListPageDialog.expandTreeView(thisTree);
+                    componentDownloaderDialog.expandTreeView(thisTree);
                 });
             }, 500);
             window.setTimeout(function () {
                 $.each(trees, function (key, thisTree) {
-                    myListPageDialog.expandTreeView(thisTree);
+                    componentDownloaderDialog.expandTreeView(thisTree);
                 });
             }, 1000);
         },
@@ -92,7 +97,7 @@ define(["sitecore"], function (Sitecore) {
         collapseAllTreeViews: function () {
             var trees = this.getAllTreeViews();
             $.each(trees, function (key, thisTree) {
-                myListPageDialog.collapseTreeView(thisTree);
+                componentDownloaderDialog.collapseTreeView(thisTree);
             });
         },
         collapseTreeView: function (tree) {
@@ -105,7 +110,7 @@ define(["sitecore"], function (Sitecore) {
         checkAllTreeViews: function () {
             var trees = this.getAllTreeViews();
             $.each(trees, function (key, thisTree) {
-                myListPageDialog.checkTreeView(thisTree);
+                componentDownloaderDialog.checkTreeView(thisTree);
             });
         },
         checkTreeView: function (tree) {
@@ -118,7 +123,7 @@ define(["sitecore"], function (Sitecore) {
         uncheckAllTreeViews: function () {
             var trees = this.getAllTreeViews();
             $.each(trees, function (key, thisTree) {
-                myListPageDialog.uncheckTreeView(thisTree);
+                componentDownloaderDialog.uncheckTreeView(thisTree);
             });
         },
         uncheckTreeView: function (tree) {
@@ -132,7 +137,7 @@ define(["sitecore"], function (Sitecore) {
             var trees = this.getAllTreeViews();
             var selectedNodes = new Array();
             $.each(trees, function (key, thisTree) {
-                myListPageDialog.visitTreeView(thisTree, function (node) {
+                componentDownloaderDialog.visitTreeView(thisTree, function (node) {
                     if (node.isSelected()) {
                         selectedNodes[selectedNodes.length] = node;
                     }
@@ -169,7 +174,7 @@ define(["sitecore"], function (Sitecore) {
                 name: "selectedPaths",
                 type: "hidden",
                 value: strPaths
-            }).appendTo(form);
+            }).appendTo(form);List
             $("<input/>",
             {
                 id: "renderingId",

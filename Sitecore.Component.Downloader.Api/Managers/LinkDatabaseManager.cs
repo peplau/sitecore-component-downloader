@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Data.Items;
+using Sitecore.Data;
 
 namespace Sitecore.Component.Downloader.Api.Managers
 {
@@ -23,18 +25,31 @@ namespace Sitecore.Component.Downloader.Api.Managers
         /// <summary>
         /// Get items of the given template
         /// </summary>
-        /// <param name="template"></param>
+        /// <param name="referredItem"></param>
+        /// <param name="templateIds"></param>
+        /// <param name="includeStandardValues"></param>
         /// <returns></returns>
-        public static Item[] GetReferrersOfTemplate(Item referredItem, TemplateItem template)
+        public static Item[] GetReferrersOfTemplates(Item referredItem, ID[] templateIds, bool includeStandardValues = false)
         {
             var links = Globals.LinkDatabase.GetReferrers(referredItem);
             if (links == null)
                 return new Item[0];
+
+            //var linkedItems = links.Select(i => i.GetSourceItem())
+            //    .Where(
+            //        i =>
+            //            i != null &&
+            //            (i.TemplateID == template.ID || i.Template.BaseTemplates.Any(t => t.ID == template.ID)));
+
             var linkedItems = links.Select(i => i.GetSourceItem())
                 .Where(
                     i =>
                         i != null &&
-                        (i.TemplateID == template.ID || i.Template.BaseTemplates.Any(t => t.ID == template.ID)));
+                        (templateIds.Any(t => t == i.TemplateID) || i.Template.BaseTemplates.Select(t=>t.ID).Intersect(templateIds).Any()));
+
+            if (!includeStandardValues)
+                linkedItems = linkedItems.Where(i => !i.Name.Equals("__standard values", StringComparison.InvariantCultureIgnoreCase));
+
             return linkedItems.ToArray();
         }
     }
