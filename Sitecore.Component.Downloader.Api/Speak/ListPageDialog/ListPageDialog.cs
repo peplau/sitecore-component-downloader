@@ -19,6 +19,8 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
         public Mvc.Presentation.Rendering SectionDatasourceTemplate { get; set; }
         public Mvc.Presentation.Rendering TxtSelectedItems { get; set; }
         public Mvc.Presentation.Rendering TreeDsItems { get; set; }
+        public Mvc.Presentation.Rendering TreePlaceholderSettings { get; set; }
+        public Mvc.Presentation.Rendering LabPlaceholderSettings { get; set; }
         #endregion
 
         private Item _componentItem;
@@ -127,10 +129,30 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
         {
             LabComponentPath.Parameters["Text"] = ComponentItem.Paths.Path;
 
-            BindDsTemplate();
+            BindDsTemplateAndItems();
+            BindPlaceholderSettings();
         }
 
-        private void BindDsTemplate()
+        private void BindPlaceholderSettings()
+        {
+            // Placeholder Settings
+            var placeholderTemplates = new TemplateItem(DatasourceTemplate.Database.GetItem(Constants.TemplateIds.PlaceholderSettings));
+            if (placeholderTemplates == null)
+                return;
+            var placeholderSettingItems = LinkDatabaseManager.GetReferrersOfTemplate(ComponentItem, placeholderTemplates);
+            if (placeholderSettingItems != null && placeholderSettingItems.Any())
+            {
+                TreePlaceholderSettings.Parameters["RootItem"] = string.Join("|",placeholderSettingItems.Select(p => p.ID.ToString()).ToArray());
+                TreePlaceholderSettings.Parameters["Database"] = ComponentItem.Database.Name;
+            }
+            else
+            {
+                TreePlaceholderSettings.Parameters["IsVisible"] = "False";
+                LabPlaceholderSettings.Parameters["IsVisible"] = "False";
+            }
+        }
+
+        private void BindDsTemplateAndItems()
         {
             if (DatasourceTemplate == null)
             {
@@ -142,14 +164,21 @@ namespace Sitecore.Component.Downloader.Api.Speak.ListPageDialog
             // Datasource Template
             TreeDsTemplate.Parameters["RootItem"] = DatasourceTemplate.ID.ToString();
             TreeDsTemplate.Parameters["Database"] = DatasourceTemplate.Database.Name;
-
-            // Base Templates
+            // Base Templates of Datasource Templates
             TreeDsBaseTemplates.Parameters["RootItem"] = string.Join("|",
                 DatasourceTemplate.BaseTemplates.Select(p => p.ID.ToString()).ToArray());
             TreeDsBaseTemplates.Parameters["Database"] = DatasourceTemplate.Database.Name;
 
-            // Items of the same type
-            var items = LinkDatabaseManager.GetItemsOfTemplate(DatasourceTemplate);
+            // Items - of the same type + Datasource Items
+            var repositoryItems = ComponentManager.GetDatasourceLocations(ComponentItem);
+            var itemsOfDsTemplates = LinkDatabaseManager.GetReferrersOfTemplate(DatasourceTemplate, DatasourceTemplate);
+            var items = new List<Item>();
+            items.AddRange(repositoryItems);
+            foreach (var item in itemsOfDsTemplates)
+            {
+                if (!repositoryItems.Where(p => item.Axes.IsDescendantOf(p)).Any())
+                    items.Add(item);
+            }
             if (items != null && items.Any())
             {
                 TreeDsItems.Parameters["RootItem"] = string.Join("|",items.Select(p => p.ID.ToString()).ToArray());

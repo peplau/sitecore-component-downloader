@@ -9,11 +9,11 @@ namespace Sitecore.Component.Downloader.Api.Managers
         /// <summary>
         /// Get all Items linking to this item
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="referredItem"></param>
         /// <returns></returns>
-        public static Item[] GetReferrersAsItems(Item item)
+        public static Item[] GetReferrersOfItem(Item referredItem)
         {
-            var links = Globals.LinkDatabase.GetReferrers(item);
+            var links = Globals.LinkDatabase.GetReferrers(referredItem);
             if (links == null)
                 return new Item[0];
             var linkedItems = links.Select(i => i.GetSourceItem()).Where(i => i != null);
@@ -25,9 +25,9 @@ namespace Sitecore.Component.Downloader.Api.Managers
         /// </summary>
         /// <param name="template"></param>
         /// <returns></returns>
-        public static Item[] GetItemsOfTemplate(TemplateItem template)
+        public static Item[] GetReferrersOfTemplate(Item referredItem, TemplateItem template)
         {
-            var links = Globals.LinkDatabase.GetReferrers(template);
+            var links = Globals.LinkDatabase.GetReferrers(referredItem);
             if (links == null)
                 return new Item[0];
             var linkedItems = links.Select(i => i.GetSourceItem())
