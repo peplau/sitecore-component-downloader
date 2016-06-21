@@ -2,54 +2,33 @@
 
 define(["sitecore"], function (Sitecore) {
     var ListPageDialog = Sitecore.Definitions.App.extend({
-        initialized: function () {
+        initialized: function() {
             componentDownloaderDialog = this;
 
             // Expand all nodes
             //this.expandAllTreeViews();
+            //window.setTimeout(function () {
+            //componentDownloaderDialog.collapseAllTreeViews();
+            //window.scrollTo(0, 0);
 
-            ////var treeView = $("." + this.TreeDsTemplate.attributes.type);
-
-            //var rootInfo = "Alert,master,df686a84-eec4-4b13-8121-f9ab343f3a0f,/temp/IconCache/Network/16x16/home.png";
-            //var rootPath = "/sitecore/layout/Sublayouts/Keystone/Components/Alert";
-
-            //this.TreeDsTemplate.set("rootitem", "{df686a84-eec4-4b13-8121-f9ab343f3a0f}");
-            //this.TreeDsTemplate.set("database", "master");
-
-            ////treeView.attr('data-sc-rootitem', "df686a84-eec4-4b13-8121-f9ab343f3a0f");
-            ////treeView.attr('data-sc-database', "master");
-
-            ////this.TreeDsTemplate.viewModel.getRoot().removeChildren();
-            ////this.TreeDsTemplate.viewModel.checkedItemIds([]);
-            ////this.TreeDsTemplate.viewModel.initialized();
-
-            //return;
-
-            //var model = Sitecore.Definitions.Models.ControlModel.extend({
-            //    initialize: function (options) {
-            //        alert(456);
-            //        debugger;
-            //        this._super();
-            //    }
-            //});
-
-            //var view = Sitecore.Definitions.Views.ControlView.extend({
-            //    initialize: function (options) {
-            //        alert(789);
-            //        debugger;
-            //        this._super();
-            //    }
-            //});
-
-            //Sitecore.Speak.Factories.createComponent("ItemTreeViews", model, view, ".sc-SimpleComponent");
-
+            this.hideLoading();
+            //}, 1500);
         },
-        getAllTreeViews : function() {
+        showLoading: function() {
+            $("[data-sc-id='SectionMain']").hide();
+            $("[data-sc-id='LabLoading']").show();
+        },
+        hideLoading: function () {
+            $("[data-sc-id='SectionMain']").show();
+            $("[data-sc-id='LabLoading']").hide();
+        },
+        getAllTreeViews: function () {
             return new Array(
                 this.TreeDsTemplate,
                 this.TreeDsBaseTemplates,
                 this.TreeDsItems,
-                this.TreePlaceholderSettings
+                this.TreePlaceholderSettings,
+                this.TreeRules
             );
         },
         visitAllTreeViews: function (callback) {
@@ -67,22 +46,6 @@ define(["sitecore"], function (Sitecore) {
                 rootNode.visit(callback);
             });
         },
-        expandAllTreeViews: function () {
-            var trees = this.getAllTreeViews();
-            $.each(trees, function (key, thisTree) {
-                componentDownloaderDialog.expandTreeView(thisTree);
-            });
-            window.setTimeout(function () {
-                $.each(trees, function (key, thisTree) {
-                    componentDownloaderDialog.expandTreeView(thisTree);
-                });
-            }, 500);
-            window.setTimeout(function () {
-                $.each(trees, function (key, thisTree) {
-                    componentDownloaderDialog.expandTreeView(thisTree);
-                });
-            }, 1000);
-        },
         expandTreeView: function (tree) {
             this.visitTreeView(tree, function (node) {
                 if (!node.isExpanded()) {
@@ -93,6 +56,37 @@ define(["sitecore"], function (Sitecore) {
                         node.expand(true);
                 }
             });
+        },
+        expandAllTreeViews: function (callback, hideLoading) {
+
+            if (hideLoading == undefined || hideLoading)
+                componentDownloaderDialog.showLoading();
+
+            var trees = this.getAllTreeViews();
+            $.each(trees, function (key, thisTree) {
+                componentDownloaderDialog.expandTreeView(thisTree);
+            });
+
+            window.setTimeout(function () {
+                $.each(trees, function (key, thisTree) {
+                    componentDownloaderDialog.expandTreeView(thisTree);
+                });
+
+                window.setTimeout(function () {
+                    $.each(trees, function (key, thisTree) {
+                        componentDownloaderDialog.expandTreeView(thisTree);
+                    });
+                    window.scrollTo(0, 0);
+
+                    if (callback != undefined)
+                        window.setTimeout(callback, 500);
+                    else if (hideLoading == undefined || hideLoading)
+                        componentDownloaderDialog.hideLoading();
+
+                }, 500);
+
+            }, 500);
+
         },
         collapseAllTreeViews: function () {
             var trees = this.getAllTreeViews();
@@ -108,10 +102,16 @@ define(["sitecore"], function (Sitecore) {
             });
         },
         checkAllTreeViews: function () {
-            var trees = this.getAllTreeViews();
-            $.each(trees, function (key, thisTree) {
-                componentDownloaderDialog.checkTreeView(thisTree);
-            });
+
+            componentDownloaderDialog.showLoading();
+
+            this.expandAllTreeViews(function() {
+                var trees = componentDownloaderDialog.getAllTreeViews();
+                $.each(trees, function (key, thisTree) {
+                    componentDownloaderDialog.checkTreeView(thisTree);
+                });
+                componentDownloaderDialog.hideLoading();
+            },true);
         },
         checkTreeView: function (tree) {
             this.visitTreeView(tree, function (node) {
