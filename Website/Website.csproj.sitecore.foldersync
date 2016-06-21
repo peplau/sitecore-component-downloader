@@ -1,6 +1,5 @@
 ﻿<Project>
-  <FolderSync SynchronizeProjectOutputFolderOnBuild="True">
-    <Folder SourceFolder="sitecore" DestinationFolder="sitecore\" Mode="Copy" Pattern="*.*" />
+  <FolderSync SynchronizeProjectOutputFolderOnBuild="False">
     <Folder SourceFolder="sitecore\" DestinationFolder="sitecore\" Mode="Copy" Pattern="*.*" />
   </FolderSync>
 </Project>

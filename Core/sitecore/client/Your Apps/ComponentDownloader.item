@@ -34,7 +34,7 @@ content-length: 0
 field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
 name: __Renderings
 key: __renderings
-content-length: 6758
+content-length: 6903
 
 <r>
   <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
@@ -51,15 +51,15 @@ content-length: 6758
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=TxtDsTemplateEmpty&amp;IsVisible=0&amp;TextType=Text&amp;Text=Datasource+Template+is+not+set" ph="DialogContent.Main" uid="{1D0388E5-1ECB-42C4-8182-FE5622F0C0B6}" />
     <r id="{59E2A66D-11D2-488D-A3BC-6C1C81326645}" par="Id=DownloadForm&amp;UseCellBottomPadding=1" ph="DialogContent.Main" uid="{8E92DAB3-BC08-48E7-AD4E-A7FB38401993}" />
     <r id="{44DBDD8B-A63F-42F7-BD11-EB7B26C413FB}" par="Id=SectionDatasourceTemplate" ph="DialogContent.Main" uid="{463C1876-48B3-477A-BB39-F0E14E4D2A64}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeDsTemplate" ph="SectionDatasourceTemplate.Content" uid="{1CAF67FC-A9BB-48FE-B82C-75615348AD52}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource+Template&amp;Id=TreeDsTemplate" ph="SectionDatasourceTemplate.Content" uid="{1CAF67FC-A9BB-48FE-B82C-75615348AD52}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabDsTemplateRelatedTemplates&amp;Text=Base+Templates" ph="SectionDatasourceTemplate.Content" uid="{8F3C0D28-3313-46DD-8358-DE8409DB97B8}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeDsBaseTemplates" ph="SectionDatasourceTemplate.Content" uid="{551C1E03-F828-446C-918F-AD39B20104CA}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource+Base+Templates&amp;Id=TreeDsBaseTemplates" ph="SectionDatasourceTemplate.Content" uid="{551C1E03-F828-446C-918F-AD39B20104CA}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabDsItems&amp;TextType=Divider&amp;Text=Datasource+Items" ph="SectionDatasourceTemplate.Content" uid="{EC44FFD7-57F0-4723-B81F-20BCA790F010}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeDsItems" ph="SectionDatasourceTemplate.Content" uid="{4F2299EE-B6B5-44F6-AFFF-A9998B01AA30}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource+Items&amp;Id=TreeDsItems" ph="SectionDatasourceTemplate.Content" uid="{4F2299EE-B6B5-44F6-AFFF-A9998B01AA30}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabPlaceholderSettings&amp;TextType=Divider&amp;Text=Placeholder+Settings" ph="DialogContent.Main" uid="{D3D1506F-A56F-462C-A43D-ADC331281FC6}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreePlaceholderSettings" ph="DialogContent.Main" uid="{39A98E0C-1000-42C4-B774-177AE97350DD}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Placeholder+Settings&amp;Id=TreePlaceholderSettings" ph="DialogContent.Main" uid="{39A98E0C-1000-42C4-B774-177AE97350DD}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabRules&amp;TextType=Divider&amp;Text=Rules" ph="DialogContent.Main" uid="{7434D30B-17F6-4906-85FA-29E72F01BB9D}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Id=TreeRules" ph="DialogContent.Main" uid="{94A9BC04-59E2-4566-9BD2-0122C2178745}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Rules&amp;Id=TreeRules" ph="DialogContent.Main" uid="{94A9BC04-59E2-4566-9BD2-0122C2178745}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=10&amp;ContentAlign=Left&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan10" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="&amp;Id=SelectedMediaTitle&amp;TextType=LargeTitle&amp;Text=%7bBinding+NavigationGroup.selectedItemName%7d" ph="FirstRowBorderSpan10.Content" uid="{07277A71-CC94-4279-BC89-6C9A07A6CD18}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=2&amp;ContentAlign=Right&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan2" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
@@ -74,7 +74,7 @@ content-length: 6758
 ----version----
 language: en
 version: 1
-revision: 09e2e85f-f81d-493c-91ff-b8e718a15e27
+revision: 78002f75-f6d6-40ca-86bc-0fa58c77f212
 
 ----field----
 field: {7205A57F-93B4-413A-AA9A-6B16BBC59565}
@@ -96,14 +96,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-09e2e85f-f81d-493c-91ff-b8e718a15e27
+78002f75-f6d6-40ca-86bc-0fa58c77f212
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 16
 
-20160606T221642Z
+20160621T012929Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

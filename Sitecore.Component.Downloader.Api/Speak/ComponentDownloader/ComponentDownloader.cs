@@ -82,8 +82,8 @@ namespace Sitecore.Component.Downloader.Api.Speak.ComponentDownloader
 
         private void DownloadPackage()
         {
-            var strPath = HttpContext.Current.Request.Form["selectedPaths"];
-            if (string.IsNullOrEmpty(strPath))
+            var jsonPaths = HttpContext.Current.Request.Form["selectedPaths"];
+            if (string.IsNullOrEmpty(jsonPaths))
                 return;
 
             // Pack data
@@ -97,9 +97,19 @@ namespace Sitecore.Component.Downloader.Api.Speak.ComponentDownloader
             };
 
             // Paths
-            var paths = strPath.Split('|').Where(p=>!string.IsNullOrEmpty(p)).ToList();
-            var source = new PackageSource { Name = packData.PackageName, Paths = paths };
-            packData.Sources = new List<PackageSource> { source };
+            var sourcesAndPaths = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonPaths);
+            packData.Sources = new List<PackageSource>();
+            foreach (var sourcesAndPath in sourcesAndPaths)
+            {
+                var paths = (List<string>)sourcesAndPath.paths.ToObject<List<string>>();
+                if (!paths.Any())
+                    continue;
+                packData.Sources.Add(new PackageSource
+                {
+                    Name = sourcesAndPath.sourceName,
+                    Paths = paths
+                });
+            }
 
             // Create Pack
             var dataFolder = Configuration.Settings.PackagePath;

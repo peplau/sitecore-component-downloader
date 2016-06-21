@@ -94,6 +94,11 @@
     userControl.SetAttribute("data-sc-templates", templates);
     userControl.SetAttribute("data-sc-database", databaseName);
 
+    foreach (var renderingParameter in this.Model.Rendering.Parameters)
+    {
+        userControl.SetAttribute("data-" + renderingParameter.Key, renderingParameter.Value);
+    }
+
     userControl.AddOptionAttribute("selectedItems");
     userControl.AddOptionAttribute("checkedItems");
     userControl.AddOptionAttribute("clickFolderMode");

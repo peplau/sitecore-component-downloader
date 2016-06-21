@@ -133,18 +133,6 @@ define(["sitecore"], function (Sitecore) {
                 }
             });
         },
-        getSelectedNodes: function () {
-            var trees = this.getAllTreeViews();
-            var selectedNodes = new Array();
-            $.each(trees, function (key, thisTree) {
-                componentDownloaderDialog.visitTreeView(thisTree, function (node) {
-                    if (node.isSelected()) {
-                        selectedNodes[selectedNodes.length] = node;
-                    }
-                });
-            });
-            return selectedNodes;
-        },
         getRenderingId: function () {
             var id = Sitecore.Helpers.url.getQueryParameters(window.location.href)['cid'];
             if (Sitecore.Helpers.id.isId(id)) {
@@ -152,15 +140,42 @@ define(["sitecore"], function (Sitecore) {
             }
             return null;
         },
+        getTreeSourceName: function(tree) {
+            return tree.viewModel.$el.attr("data-source");
+        },
+        getTreeSelectedNodes: function(tree) {
+            var selectedNodes = new Array();
+            componentDownloaderDialog.visitTreeView(tree, function (node) {
+                if (node.isSelected()) {
+                    selectedNodes[selectedNodes.length] = node;
+                }
+            });
+            return selectedNodes;
+        },
+        getSelectedSourcesAndPaths: function () {
+            var trees = this.getAllTreeViews();
+            var selectedNodes = new Array();
+            $.each(trees, function (key, thisTree) {
+                var treeSourceName = componentDownloaderDialog.getTreeSourceName(thisTree);
+                var treeSelectedNodes = componentDownloaderDialog.getTreeSelectedNodes(thisTree);
+                var selectedPaths = new Array();
+                for (var i = 0; i < treeSelectedNodes.length; i++)
+                    selectedPaths[selectedPaths.length] = treeSelectedNodes[i].data.path;
+                selectedNodes[selectedNodes.length] = {
+                    sourceName: treeSourceName,
+                    paths: selectedPaths
+                };
+            });
+            return selectedNodes;
+        },
         download: function (a, b, c) {
-            var selectedNodes = this.getSelectedNodes();
+            //var selectedNodes = this.getSelectedNodes();
 
-            alert(selectedNodes.length);
+            //alert(selectedNodes.length);
             debugger;
 
-            var strPaths = "";
-            for (var i = 0; i < selectedNodes.length; i++)
-                strPaths += selectedNodes[i].data.path + "|";
+            var getSelectedSourcesAndPaths = this.getSelectedSourcesAndPaths();
+            var jsonToSend = JSON.stringify(getSelectedSourcesAndPaths);
 
             // data-sc-id="DownloadForm"
             var form = $("[data-sc-id='DownloadForm']");
@@ -173,8 +188,8 @@ define(["sitecore"], function (Sitecore) {
                 id: "selectedPaths",
                 name: "selectedPaths",
                 type: "hidden",
-                value: strPaths
-            }).appendTo(form);List
+                value: jsonToSend
+            }).appendTo(form);
             $("<input/>",
             {
                 id: "renderingId",
