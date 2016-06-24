@@ -1,5 +1,6 @@
 ﻿using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Web.UI.WebControls;
 
 namespace Sitecore.Component.Downloader.Api.Managers
 {
@@ -13,7 +14,7 @@ namespace Sitecore.Component.Downloader.Api.Managers
         public static TemplateItem GetDatasourceTemplate(Item component)
         {
             ReferenceField field = component.Fields["Datasource Template"];
-            return field == null ? null : field.TargetItem;            
+            return field == null ? null : field.TargetItem;
         }
 
         /// <summary>
@@ -23,17 +24,50 @@ namespace Sitecore.Component.Downloader.Api.Managers
         /// <returns></returns>
         public static Item[] GetDatasourceLocations(Item component)
         {
-            var contextPath = "/sitecore/content";
+            const string contextPath = "/sitecore/content";
             var args = new Sitecore.Pipelines.GetRenderingDatasource.GetRenderingDatasourceArgs(component)
             {
                 ContextItemPath = contextPath
             };
 
-            var pipelines = Sitecore.Pipelines.CorePipelineFactory.GetPipeline("getRenderingDatasource",string.Empty);
+            var pipelines = Sitecore.Pipelines.CorePipelineFactory.GetPipeline("getRenderingDatasource", string.Empty);
             pipelines.Run(args);
 
             // After processing it will fill args.DatasourceRoots
             return args.DatasourceRoots.ToArray();
+        }
+
+        /// <summary>
+        /// Get Experience Editor Buttons for a given Rendering/Sublayout
+        /// </summary>
+        /// <param name="component"></param>
+        /// <returns></returns>
+        public static Item[] GetExperienceEditorButtons(Item component)
+        {
+            MultilistField field = component.Fields["Page Editor Buttons"];
+            return field == null ? null : field.GetItems();
+        }
+
+        /// <summary>
+        /// Get Parameters Template for a given Rendering
+        /// </summary>
+        /// <param name="component"></param>
+        /// <returns></returns>
+        internal static Item GetParametersTemplate(Item component)
+        {
+            ReferenceField field = component.Fields["Parameters Template"];
+            return field == null ? null : field.TargetItem;
+        }
+
+        /// <summary>
+        /// Get Thumbnail MediaItem
+        /// </summary>
+        /// <param name="component"></param>
+        /// <returns></returns>
+        internal static Item GetThumbnail(Item component)
+        {
+            ThumbnailField field = component.Fields["__Thumbnail"];
+            return field == null ? null : field.MediaItem;
         }
     }
 }

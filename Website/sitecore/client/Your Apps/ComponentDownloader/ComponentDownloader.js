@@ -28,7 +28,10 @@ define(["sitecore"], function (Sitecore) {
                 this.TreeDsBaseTemplates,
                 this.TreeDsItems,
                 this.TreePlaceholderSettings,
-                this.TreeRules
+                this.TreeRules,
+                this.TreeExpEditorButtons,
+                this.TreeParametersTemplate,
+                this.TreeThumbnail
             );
         },
         visitAllTreeViews: function (callback) {
@@ -143,7 +146,7 @@ define(["sitecore"], function (Sitecore) {
         getTreeSourceName: function(tree) {
             return tree.viewModel.$el.attr("data-source");
         },
-        getTreeSelectedNodes: function(tree) {
+        getTreeSelectedNodes: function (tree) {
             var selectedNodes = new Array();
             componentDownloaderDialog.visitTreeView(tree, function (node) {
                 if (node.isSelected()) {
@@ -158,12 +161,16 @@ define(["sitecore"], function (Sitecore) {
             $.each(trees, function (key, thisTree) {
                 var treeSourceName = componentDownloaderDialog.getTreeSourceName(thisTree);
                 var treeSelectedNodes = componentDownloaderDialog.getTreeSelectedNodes(thisTree);
-                var selectedPaths = new Array();
-                for (var i = 0; i < treeSelectedNodes.length; i++)
-                    selectedPaths[selectedPaths.length] = treeSelectedNodes[i].data.path;
+                var selectedPathsAndDbs = new Array();              
+                for (var i = 0; i < treeSelectedNodes.length; i++) {
+                    selectedPathsAndDbs[selectedPathsAndDbs.length] = {
+                        path: treeSelectedNodes[i].data.path,
+                        database: treeSelectedNodes[0].data.itemUri.databaseUri.databaseName
+                    }
+                }
                 selectedNodes[selectedNodes.length] = {
                     sourceName: treeSourceName,
-                    paths: selectedPaths
+                    pathsAndDbs: selectedPathsAndDbs
                 };
             });
             return selectedNodes;

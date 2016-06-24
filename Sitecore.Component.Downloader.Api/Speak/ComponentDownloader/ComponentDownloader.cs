@@ -22,7 +22,13 @@ namespace Sitecore.Component.Downloader.Api.Speak.ComponentDownloader
         public Mvc.Presentation.Rendering TreePlaceholderSettings { get; set; }
         public Mvc.Presentation.Rendering LabPlaceholderSettings { get; set; }
         public Mvc.Presentation.Rendering TreeRules { get; set; }
-        public Mvc.Presentation.Rendering LabRules { get; set; }        
+        public Mvc.Presentation.Rendering LabRules { get; set; }
+        public Mvc.Presentation.Rendering TreeExpEditorButtons { get; set; }
+        public Mvc.Presentation.Rendering LabExpEditorButtons { get; set; }
+        public Mvc.Presentation.Rendering TreeParametersTemplate { get; set; }
+        public Mvc.Presentation.Rendering LabParametersTemplate { get; set; }
+        public Mvc.Presentation.Rendering TreeThumbnail { get; set; }
+        public Mvc.Presentation.Rendering LabThumbnail { get; set; }
         #endregion
 
         #region Helper Proterties
@@ -89,27 +95,44 @@ namespace Sitecore.Component.Downloader.Api.Speak.ComponentDownloader
             // Pack data
             var packData = new PackageData
             {
-                Database = ComponentItem.Database.Name,
                 PackageName = string.IsNullOrEmpty(ComponentItem.DisplayName)
                     ? ComponentItem.Name
                     : ComponentItem.DisplayName,
                 Author = Context.User.GetLocalName()
             };
 
-            // Paths
+            // Sources and Paths
             var sourcesAndPaths = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonPaths);
             packData.Sources = new List<PackageSource>();
             foreach (var sourcesAndPath in sourcesAndPaths)
             {
-                var paths = (List<string>)sourcesAndPath.paths.ToObject<List<string>>();
-                if (!paths.Any())
+                var pathsAndDbs = (List<dynamic>)sourcesAndPath.pathsAndDbs.ToObject<List<dynamic>>();
+                if (!pathsAndDbs.Any())
                     continue;
                 packData.Sources.Add(new PackageSource
                 {
                     Name = sourcesAndPath.sourceName,
-                    Paths = paths
+                    ItemEntries = pathsAndDbs.Select(p => new PackageItemEntry()
+                    {
+                        Database = p.database,
+                        Path = p.path
+                    }).ToList()
                 });
             }
+
+            // Add the rendering itself to the package
+            packData.Sources.Add(new PackageSource
+            {
+                Name = packData.PackageName,
+                ItemEntries = new List<PackageItemEntry>()
+                {
+                    new PackageItemEntry()
+                    {
+                        Database = ComponentItem.Database.Name,
+                        Path = ComponentItem.Paths.Path
+                    }
+                }
+            });
 
             // Create Pack
             var dataFolder = Configuration.Settings.PackagePath;
@@ -146,6 +169,54 @@ namespace Sitecore.Component.Downloader.Api.Speak.ComponentDownloader
             BindDsTemplateAndItems();
             BindPlaceholderSettings();
             BindRules();
+            BindExpEditorButtons();
+            BindParametersTemplate();
+            BindThumbnail();
+        }
+
+        private void BindThumbnail()
+        {            
+            var thumbnail = ComponentManager.GetThumbnail(ComponentItem);
+            if (thumbnail != null)
+            {
+                TreeThumbnail.Parameters["RootItem"] = thumbnail.ID.ToString();
+                TreeThumbnail.Parameters["Database"] = thumbnail.Database.Name;
+            }
+            else
+            {
+                TreeThumbnail.Parameters["IsVisible"] = "False";
+                LabThumbnail.Parameters["IsVisible"] = "False";
+            }
+        }
+
+        private void BindParametersTemplate()
+        {
+            var parameterTemplate = ComponentManager.GetParametersTemplate(ComponentItem);
+            if (parameterTemplate != null)
+            {
+                TreeParametersTemplate.Parameters["RootItem"] = parameterTemplate.ID.ToString();
+                TreeParametersTemplate.Parameters["Database"] = parameterTemplate.Database.Name;
+            }
+            else
+            {
+                TreeParametersTemplate.Parameters["IsVisible"] = "False";
+                LabParametersTemplate.Parameters["IsVisible"] = "False";
+            }
+        }
+
+        private void BindExpEditorButtons()
+        {
+            var buttons = ComponentManager.GetExperienceEditorButtons(ComponentItem);
+            if (buttons != null && buttons.Any())
+            {
+                TreeExpEditorButtons.Parameters["RootItem"] = string.Join("|", buttons.Select(p => p.ID.ToString()).ToArray());
+                TreeExpEditorButtons.Parameters["Database"] = buttons.First().Database.Name;
+            }
+            else
+            {
+                TreeExpEditorButtons.Parameters["IsVisible"] = "False";
+                LabExpEditorButtons.Parameters["IsVisible"] = "False";
+            }            
         }
 
         private void BindRules()

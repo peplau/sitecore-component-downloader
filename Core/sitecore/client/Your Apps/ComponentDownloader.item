@@ -34,7 +34,7 @@ content-length: 0
 field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
 name: __Renderings
 key: __renderings
-content-length: 7285
+content-length: 8465
 
 <r>
   <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
@@ -44,7 +44,7 @@ content-length: 7285
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=HeaderTitle&amp;Text=Component+Downloader" ph="DialogHeader.Title" uid="{1DC97590-77EC-4F75-A687-D86F7D22CAAA}" />
     <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.download()&amp;Id=DownloadButton&amp;IsEnabled=1&amp;ButtonType=Primary&amp;Text=Download" ph="DialogHeader.Buttons" uid="{F5005B19-B18B-47BE-B0CA-D92005C2FECA}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabComponentPath&amp;TextType=LargeTitle" ph="DialogContent.Title" uid="{0DC24E56-ADE9-4039-9DF7-FE4E14579A64}" />
-    <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3adebugger%3b+alert(this.close)%3b+this.close()%3bdebugger%3b+&amp;Id=CancelButton&amp;IsEnabled=1&amp;ButtonType=Default&amp;Tooltip=Close+the+dialog&amp;Text=Cancel" ph="DialogHeader.Buttons" uid="{F5005B19-B18B-47BE-B0CA-D92005C2FECA}" />
+    <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3adebugger%3b+jQuery(%22.ui-dialog-titlebar-close%22).click()%3b+this.close()%3b&amp;Id=CancelButton&amp;IsEnabled=1&amp;ButtonType=Default&amp;Tooltip=Close+the+dialog&amp;Text=Cancel" ph="DialogHeader.Buttons" uid="{F5005B19-B18B-47BE-B0CA-D92005C2FECA}" />
     <r id="{68EA7764-DA0C-476E-BFD6-A2344FFEE69F}" par="ShowToolbar=0" ph="DialogContent" uid="{57882B01-67A3-40A2-B6F0-F84287D6F584}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="IsGridRowFluid=1&amp;Id=FirstRowBorder" ph="DialogContent.Main" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
     <r id="{44DBDD8B-A63F-42F7-BD11-EB7B26C413FB}" par="Id=SectionMain&amp;IsVisible=0" ph="DialogContent.Main" uid="{D7F0CBFF-1919-4805-B4B0-0FE78D6D1677}" />
@@ -53,15 +53,21 @@ content-length: 7285
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=TxtDsTemplateEmpty&amp;IsVisible=0&amp;TextType=Text&amp;Text=Datasource+Template+is+not+set" ph="SectionMain.Content" uid="{1D0388E5-1ECB-42C4-8182-FE5622F0C0B6}" />
     <r id="{59E2A66D-11D2-488D-A3BC-6C1C81326645}" par="Id=DownloadForm&amp;UseCellBottomPadding=1" ph="SectionMain.Content" uid="{8E92DAB3-BC08-48E7-AD4E-A7FB38401993}" />
     <r id="{44DBDD8B-A63F-42F7-BD11-EB7B26C413FB}" par="Id=SectionDatasourceTemplate" ph="SectionMain.Content" uid="{463C1876-48B3-477A-BB39-F0E14E4D2A64}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource%2bTemplate&amp;Id=TreeDsTemplate" ph="SectionDatasourceTemplate.Content" uid="{1CAF67FC-A9BB-48FE-B82C-75615348AD52}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource%252bTemplate&amp;Id=TreeDsTemplate" ph="SectionDatasourceTemplate.Content" uid="{1CAF67FC-A9BB-48FE-B82C-75615348AD52}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabDsTemplateRelatedTemplates&amp;Text=Base+Templates" ph="SectionDatasourceTemplate.Content" uid="{8F3C0D28-3313-46DD-8358-DE8409DB97B8}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource%2bBase%2bTemplates&amp;Id=TreeDsBaseTemplates" ph="SectionDatasourceTemplate.Content" uid="{551C1E03-F828-446C-918F-AD39B20104CA}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource%252bBase%252bTemplates&amp;Id=TreeDsBaseTemplates" ph="SectionDatasourceTemplate.Content" uid="{551C1E03-F828-446C-918F-AD39B20104CA}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabDsItems&amp;TextType=Divider&amp;Text=Datasource+Items" ph="SectionDatasourceTemplate.Content" uid="{EC44FFD7-57F0-4723-B81F-20BCA790F010}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource%2bItems&amp;Id=TreeDsItems" ph="SectionDatasourceTemplate.Content" uid="{4F2299EE-B6B5-44F6-AFFF-A9998B01AA30}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Datasource%252bItems&amp;Id=TreeDsItems" ph="SectionDatasourceTemplate.Content" uid="{4F2299EE-B6B5-44F6-AFFF-A9998B01AA30}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabParametersTemplate&amp;TextType=Divider&amp;Text=Parameters+Template" ph="SectionMain.Content" uid="{48F6FE00-F417-47FE-AAB7-0F0903EB5A07}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Parameters+Template&amp;Id=TreeParametersTemplate" ph="SectionMain.Content" uid="{A79CB8FC-08FE-4AB3-B773-93ABF8AF42FB}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabPlaceholderSettings&amp;TextType=Divider&amp;Text=Placeholder+Settings" ph="SectionMain.Content" uid="{D3D1506F-A56F-462C-A43D-ADC331281FC6}" />
-    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Placeholder%2bSettings&amp;Id=TreePlaceholderSettings" ph="SectionMain.Content" uid="{39A98E0C-1000-42C4-B774-177AE97350DD}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Placeholder%252bSettings&amp;Id=TreePlaceholderSettings" ph="SectionMain.Content" uid="{39A98E0C-1000-42C4-B774-177AE97350DD}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabRules&amp;TextType=Divider&amp;Text=Rules" ph="SectionMain.Content" uid="{7434D30B-17F6-4906-85FA-29E72F01BB9D}" />
     <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Rules&amp;Id=TreeRules" ph="SectionMain.Content" uid="{94A9BC04-59E2-4566-9BD2-0122C2178745}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabExpEditorButtons&amp;TextType=Divider&amp;Text=Experience+Editor+Buttons" ph="SectionMain.Content" uid="{AAD7DFE0-E8FE-4DA0-A660-6C221212F237}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Experience+Editor+Buttons&amp;Id=TreeExpEditorButtons" ph="SectionMain.Content" uid="{724D7D66-A82F-4441-83A9-1C9174E3372D}" />
+    <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LabThumbnail&amp;TextType=Divider&amp;Text=Thumbnail" ph="SectionMain.Content" uid="{CDF368FA-713D-461B-B28D-69B8D3965C38}" />
+    <r id="{AA19E2E5-FE8E-42E0-ABCD-F0D7E04A5DD8}" par="Source=Thumbnail&amp;Id=TreeThumbnail" ph="SectionMain.Content" uid="{DD1BDDED-CC5A-486E-A8CA-25713AC9E009}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=10&amp;ContentAlign=Left&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan10" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
     <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="&amp;Id=SelectedMediaTitle&amp;TextType=LargeTitle&amp;Text=%7bBinding+NavigationGroup.selectedItemName%7d" ph="FirstRowBorderSpan10.Content" uid="{07277A71-CC94-4279-BC89-6C9A07A6CD18}" />
     <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="GridColumns=2&amp;ContentAlign=Right&amp;IsGridRowFluid=0&amp;Id=FirstRowBorderSpan2" ph="FirstRowBorder.Content" uid="{EA6E8EBD-D458-421C-83FE-68040C3685AB}" />
@@ -76,7 +82,7 @@ content-length: 7285
 ----version----
 language: en
 version: 1
-revision: 660177c4-37d6-4f67-94b1-fc77093bc996
+revision: 41e08c50-62ed-4532-bc69-a74fbdc57d24
 
 ----field----
 field: {7205A57F-93B4-413A-AA9A-6B16BBC59565}
@@ -98,14 +104,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-660177c4-37d6-4f67-94b1-fc77093bc996
+41e08c50-62ed-4532-bc69-a74fbdc57d24
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 16
 
-20160621T155452Z
+20160624T232120Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
